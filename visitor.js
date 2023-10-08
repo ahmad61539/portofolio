@@ -1,7 +1,15 @@
-var xhr = new XMLHttpRequest();
-xhr.open("GET", "https://api.countapi.xyz/hit/rezzaapr.my.id/visits");
-xhr.responseType = "json";
-xhr.onload = function() {
-  document.querySelector('.footer-title').innerHTML = 'Total Visitor : ' + this.response.value;
+function addVisitor() {
+  if (localStorage.getItem('visitorCount')) {
+      // Jika data sudah ada di localStorage, tambahkan 1 ke nilai yang ada
+      localStorage.setItem('visitorCount', parseInt(localStorage.getItem('visitorCount')) + 1);
+  } else {
+      // Jika belum ada data di localStorage, setel nilai pertama menjadi 1
+      localStorage.setItem('visitorCount', 1);
+  }
+
+  // Perbarui tampilan jumlah pengunjung di halaman
+  document.getElementById('visitor-count').textContent = localStorage.getItem('visitorCount');
 }
-xhr.send();
+
+// Panggil fungsi addVisitor saat halaman dimuat
+addVisitor();
